@@ -5,6 +5,19 @@ import cv2
 from tensorflow.keras.models import load_model
 
 # Load model
+# 🏷️ App Title & Header
+st.set_page_config(page_title="Face Recognition App", page_icon="🧠", layout="wide")
+st.title("🧠 Face Recognition System")
+st.subheader("Real-time Face Detection and Recognition using OpenCV & Deep Learning")
+
+st.markdown("""
+Welcome to the **Face Recognition App**!  
+This tool allows you to **detect and recognize faces** from uploaded images or your webcam feed.  
+Use the sidebar to upload an image or start live recognition.
+""")
+
+st.divider()  
+
 MODEL_PATH = "models/cnn_model.h5"
 model = load_model(MODEL_PATH)
 classes = ['Angry','Disgust','Fear','Happy','Sad','Surprise','Neutral']
@@ -29,7 +42,7 @@ if uploaded_file:
     if len(faces) > 0:
         x, y, w, h = faces[0]
         face_crop = img_array[y:y+h, x:x+w]
-        st.image(face_crop, caption="Detected Face", use_column_width=True)
+        st.image(face_crop, caption="Detected Face", use_container_width=True)
 
         # Preprocess and predict
         # Assume face_crop is the detected face (NumPy array)
